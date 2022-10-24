@@ -24,12 +24,17 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.coffeeService.findOne(id);
+  /**
+   * With the validation pipe of transform = true on main.ts,
+   * The id on the param will be auto converted to number
+   * */
+  findOne(@Param('id') id: number) {
+    return this.coffeeService.findOne('' + id);
   }
 
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    console.log(createCoffeeDto instanceof CreateCoffeeDto);
     return this.coffeeService.create(createCoffeeDto);
   }
 
