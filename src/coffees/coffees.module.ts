@@ -10,11 +10,13 @@ import { Event } from '../events/entities/event.entity';
   imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
   controllers: [CoffeesController],
   providers: [
-    // CoffeesService // Shorthand
-    {
-      provide: CoffeesService,
-      useClass: CoffeesService,
-    },
+    /** Long hand **/
+    // {
+    //   provide: CoffeesService,
+    //   useClass: CoffeesService,
+    // },
+    CoffeesService,
   ],
+  exports: [CoffeesService],
 })
 export class CoffeesModule {}
