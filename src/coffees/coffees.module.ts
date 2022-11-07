@@ -5,6 +5,7 @@ import { CoffeesService } from './coffees.service';
 import { Coffee } from './entity/coffee.entity';
 import { Flavor } from './entity/flavor.entity';
 import { Event } from '../events/entities/event.entity';
+import { COFFEE_BRANDS } from './coffees.constants';
 
 class MockCoffeesService {}
 
@@ -12,12 +13,11 @@ class MockCoffeesService {}
   imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
   controllers: [CoffeesController],
   providers: [
-    /** Long hand **/
+    CoffeesService,
     {
-      provide: CoffeesService,
-      useValue: new MockCoffeesService(),
+      provide: COFFEE_BRANDS,
+      useValue: ['Star Boinks', 'Buddy Brew'],
     },
-    // CoffeesService,
   ],
   exports: [CoffeesService],
 })
