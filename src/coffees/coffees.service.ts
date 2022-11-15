@@ -26,7 +26,7 @@ export class CoffeesService {
     private readonly dataSource: DataSource,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
   ) {
-    console.log('Coffee Service Instantiated');
+    console.log('Coffee Service Instantiated!');
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
