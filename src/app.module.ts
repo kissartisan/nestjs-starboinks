@@ -9,7 +9,15 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    /**
+   * To specify another path for this file,
+   * let’s pass in an options object into the forRoot() method
+   * and set the envFilePath property like so:
+   * In this example, we’re looking instead for a .environment file.
+   */
+    ConfigModule.forRoot({
+      envFilePath: '.environment',
+    }),
     CoffeesModule,
     TypeOrmModule.forRoot({
       type: 'postgres', // type of our database
