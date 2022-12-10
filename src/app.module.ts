@@ -7,6 +7,7 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import appConfig from './config/app.config';
 
 @Module({
   imports: [
@@ -16,13 +17,17 @@ import { ConfigModule } from '@nestjs/config';
      * and set the envFilePath property like so:
      * In this example, we’re looking instead for a .environment file.
      */
+    // ConfigModule.forRoot({
+    //   envFilePath: '.environment',
+    //   // ignoreEnvFile: true, // Have ConfigModule *ignore* .env files
+    //   validationSchema: Joi.object({
+    //     DATABASE_HOST: Joi.required(),
+    //     DATABASE_PORT: Joi.number().default(5432),
+    //   }),
+    // }),
     ConfigModule.forRoot({
       envFilePath: '.environment',
-      // ignoreEnvFile: true, // Have ConfigModule *ignore* .env files
-      validationSchema: Joi.object({
-        DATABASE_HOST: Joi.required(),
-        DATABASE_PORT: Joi.number().default(5432),
-      }),
+      load: [appConfig],
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
