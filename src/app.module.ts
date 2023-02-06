@@ -25,21 +25,23 @@ import appConfig from './config/app.config';
     //     DATABASE_PORT: Joi.number().default(5432),
     //   }),
     // }),
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'postgres', // type of our database
+        host: process.env.DATABASE_HOST, // database host
+        port: +process.env.DATABASE_PORT, // database port
+        username: process.env.DATABASE_USER, // username
+        password: process.env.DATABASE_PASSWORD, // user password
+        database: 'postgres', // name of our database,
+        autoLoadEntities: true, // models will be loaded automatically
+        synchronize: true, // your entities will be synced with the database(recommended: disable in prod)
+      }),
+    }),
     ConfigModule.forRoot({
       envFilePath: '.environment',
       load: [appConfig],
     }),
     CoffeesModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres', // type of our database
-      host: process.env.DATABASE_HOST, // database host
-      port: +process.env.DATABASE_PORT, // database port
-      username: process.env.DATABASE_USER, // username
-      password: process.env.DATABASE_PASSWORD, // user password
-      database: 'postgres', // name of our database,
-      autoLoadEntities: true, // models will be loaded automatically
-      synchronize: true, // your entities will be synced with the database(recommended: disable in prod)
-    }),
     CoffeeRatingModule,
     DatabaseModule,
   ],
